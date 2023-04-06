@@ -2,13 +2,26 @@ import Reminder from "../models/reminder";
 
 interface ReminderListProps {
   items: Reminder[];
+  onRemoveReminder: (id: number) => void;
 }
 
-export default function ReminderList({ items }: ReminderListProps) {
+export default function ReminderList({
+  items,
+  onRemoveReminder,
+}: ReminderListProps) {
   return (
-    <ul>
+    <ul className="list-group">
       {items.map((item) => (
-        <li key={item.id}>{item.title}</li>
+        <li className="list-group-item" key={item.id}>
+          {item.title}
+
+          <button
+            onClick={() => onRemoveReminder(item.id)}
+            className="btn btn-sm btn-outline-danger mx-2 rounded-pill"
+          >
+            Delete
+          </button>
+        </li>
       ))}
     </ul>
   );
